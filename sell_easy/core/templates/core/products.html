@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title%}Products{% endblock%}
+
+{% block content%}
+
+    <h1>Featured Products</h1>
+
+    {%for product in products%}
+
+        <div style="background-color: {% cycle 'red' 'green'%}; border-radius:8px;">
+            <h2>{{product.name}}</h2>
+            <p>{{product.desc|truncatewords:50}}</p>
+            <p>{{product.price}}</p>
+            {% with reviews=product.get_num_reviews rating=product.average_rating%}
+            <h2>Rating: {{ratings}}</h2>
+            <p>Review: {{reviews}}</p>
+            {% endwith%}
+        </div>        
+    {% endfor %}
+
+    {% include './category.html' with categories=categories %}
+
+{% endblock %}
