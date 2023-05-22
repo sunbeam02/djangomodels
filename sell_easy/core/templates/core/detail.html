@@ -1,0 +1,41 @@
+{% extends 'base.html'%}
+{% block title%}{{product.name}}{% endblock%}
+{% block content%}
+    <div style="background-color: {% cycle 'red' 'green'%}; border-radius:8px;">
+        <h2>{{product.name}}</h2>
+        <p>{{product.desc|truncatewords:50}}</p>
+        <h3>{{product.price}}</h3>
+        <span>
+            <button>Add to cart</button>
+            <span>
+                <button>-</button>
+                <p>1</p>
+                <button>+</button>
+            </span>
+        </span>
+        {% with reviews=product.get_num_reviews rating=product.average_rating%}
+        <div class="rating">
+            <h2>Rating: {{ratings}}</h2>
+            <p>Review: {{reviews}}</p>
+        </div>
+        {% endwith%}
+        <div class="reviews">
+            {% for rating in product.ratings.all%}
+                <p>Comment: {{rating.remark}}-{{rarting.rating}}</p>
+            {% endfor%}
+        </div>
+    </div>
+    <div>
+        <h2>Related products</h2>
+            <div style="display:grid; grid-template-columns:1fr 1fr 1fr;">
+                {% for rating in related_products%}
+                <a href="{% url 'product' product.id %}">
+                    <div>
+                        <h3>{{product.name}}</h3>
+                        <h3>{{product.price}}</h3>
+                        <h3>{{product.name}}</h3>
+
+{% endblock%}
+
+
+

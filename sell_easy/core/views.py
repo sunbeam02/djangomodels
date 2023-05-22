@@ -23,11 +23,14 @@ from .models import Products, Store, Category
 
 def products(request):
     products = Products.objects.all()
-    context = {'products':products}
+    categories = Category.objects.all()
+    context = {'products':products, 'categories':categories}
     return render(request, 'core/products.html', context)
 
 def product(request, id):
-    products = Products.objects.get(id=id).values()
+    products = Products.objects.get(id=id)
+    related_products = Products.objects.filter(category=product.category)
+    return render(request, 'core/details.html', {'product':product, 'related_products':related_products})
     
     
 
