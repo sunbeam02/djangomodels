@@ -1,0 +1,18 @@
+
+{% extends 'base.html'%}
+
+{% block content%}
+<form method='post' action='/account/login' > 
+
+    {% csrf_token %}
+    
+    <h2>Sell Easy</h2>
+    {% if err%}
+    <p>Email or Password not correct</p>
+    <p>{{err}}</p>
+    {% endif%}
+    {{form.as_p}}
+    <input type="submit" value="Log in">
+</form>
+
+{%endblock%}
