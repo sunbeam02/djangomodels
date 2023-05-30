@@ -4,6 +4,7 @@ from core.account import views as account_views
 from . import views
 
 urlpatterns = [
+    path('', views.home, name="home"),
     path('products', views.products, name="products"),
     path('products/<int:id>', views.products, name="product"),
     path('stores', views.stores, name="stores"),
@@ -12,11 +13,13 @@ urlpatterns = [
     path('categories', views.categories, name="categories"),
     path('categories/<int:id>', views.category, name="category"),
 
+    #: ACCOUNT VIEWS
     path('account/', include([
         path('login', account_views.login, name='login'),
         path('signup', account_views.signup, name='signup'),
     ])),
 
+    # :DASHBOARD VIEW
     path('dashboard', account_views.dashboard, name='dashboard')
 
 ]

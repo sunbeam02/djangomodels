@@ -21,6 +21,22 @@ from .models import Products, Store, Category
 #     page += '</ul>'
 #     return page
 
+def home(request):
+    products = Products.objects.all()
+    best_selling_products = products
+    products =products[:8]
+    categories = Category.objects.all()[:4]
+    stores = Store.objects.all()[:4]
+
+    context={
+        'products':products,
+        'categories':categories,
+        'stores':stores,
+        'best_selling_products':best_selling_products
+    }
+
+    return render(request, 'core/home.html', context)
+
 def products(request):
     products = Products.objects.all()
     categories = Category.objects.all()
@@ -29,7 +45,7 @@ def products(request):
 
 def product(request, id):
     products = Products.objects.get(id=id)
-    related_products = Products.objects.filter(category=product.category)
+    related_products = Products.objects.filter(category=product.category).exclude(id=product.id)
     return render(request, 'core/details.html', {'product':product, 'related_products':related_products})
     
     

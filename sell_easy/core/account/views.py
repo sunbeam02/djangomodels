@@ -46,5 +46,5 @@ def dashboard(request):
     user_id = request.session['user_id']
     user = Profile.objects.get(id=user_id)
     store = Store.objects.get(owner = user)
-    return render(request, 'accounts/dashboard.html', {'store':user})
+    return render(request, 'accounts/dashboard.html', {'store':store})
 

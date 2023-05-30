@@ -1,6 +1,6 @@
 from django.db import models
+from django.contrib import admin
 from django.contrib.auth.models import User
-from django.db.models import Q
 from core.account.models import Profile
 from django.core.validators import MaxValueValidator,MinValueValidator
 
@@ -14,10 +14,16 @@ class Store(models.Model):
     def __str__(self) -> str:
         pass
 
+    @admin.display(description="show total products")
+    def total_products(self):
+        total = self.products.count()
+        return total
+
 
 class Category(models.Model):
     #owner
     name = models.CharField(max_length=100)
+
     def __str__(self) -> str:
         return self.name
     
@@ -34,9 +40,9 @@ class Products(models.Model):
     date_added =  models.DateField(auto_now_add=True)
    
 
-    def discount(self, discount=20):
-        self.price = self.price * (discount/100)
-        return self.price
+    # def discount(self, discount=20):
+    #     self.price = self.price * (discount/100)
+    #     return self.price
     
     def __str__(self) -> str:
         return f'{self.name}, {self.desc}'
