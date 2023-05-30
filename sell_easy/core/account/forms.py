@@ -8,5 +8,5 @@ class LoginForm(forms.Form):
 class SignUpForm(forms.ModelForm):
     class Meta:
         model = Profile
-        fields = ('email', 'first_name', 'last_name', 'password', 'address', 'phone_number')
+        fields = ('__all__')
         exclude =('is_verified', 'is_admin', 'is_staff', "is_seller")

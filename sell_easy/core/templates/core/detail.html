@@ -1,12 +1,17 @@
 {% extends 'base.html'%}
+{% load static%}
+
+<link rel="text/stylesheet" href="{% static 'products.css'%}"/>
+
 {% block title%}{{product.name}}{% endblock%}
+
 {% block content%}
-    <div style="background-color: {% cycle 'red' 'green'%}; border-radius:8px;">
-        <h2>{{product.name}}</h2>
-        <p>{{product.desc|truncatewords:50}}</p>
+    <div class="container">
+        <h2>{{product.name|upper}}</h2>
+        <p>{{product.desc}}</p>
         <h3>{{product.price}}</h3>
         <span>
-            <button>Add to cart</button>
+            <button class="cart-btn">Add to cart</button>
             <span>
                 <button>-</button>
                 <p>1</p>
@@ -33,8 +38,12 @@
                     <div>
                         <h3>{{product.name}}</h3>
                         <h3>{{product.price}}</h3>
-                        <h3>{{product.name}}</h3>
-
+                        <p>Seller: {{product.store.name}}</p>
+                    </div>
+                </a>
+                {% endfor %}
+            </div>
+    </div>
 {% endblock%}
 
 
