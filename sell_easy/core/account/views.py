@@ -15,7 +15,6 @@ def login(request):
             if form.is_valid():
                 email = form.cleaned_data['email']
                 password = form.cleaned_data['password']
-
                 user = authenticate(email=email, password=password)
 
                 if user is not None:
